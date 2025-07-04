@@ -1,5 +1,7 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Home() {
   const [microsite, setMicrosite] = useState(null);
@@ -8,39 +10,106 @@ export default function Home() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
+  const [currentParticleSet, setCurrentParticleSet] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const refreshIntervalRef = useRef(null);
   const lastUserActivityRef = useRef(Date.now());
   const isDocumentVisibleRef = useRef(true);
 
-  const STATIC_TITLE = 'FWB+';
-  const STATIC_ICON = '🔗';
+  const STATIC_TITLE = 'FWB Plus';
+  const STATIC_SUBTITLE = 'Event Organizer & Creative Solutions';
+  const STATIC_DESCRIPTION = 'Transforming visions into unforgettable experiences. Professional event organization services for corporate gatherings, celebrations, and special moments.';
 
-  const REFRESH_INTERVAL = 30000; const USER_ACTIVITY_THRESHOLD = 5000; const MAX_RETRY_ATTEMPTS = 3;
+  const REFRESH_INTERVAL = 30000;
+  const USER_ACTIVITY_THRESHOLD = 5000;
+  const MAX_RETRY_ATTEMPTS = 3;
   const RETRY_DELAY = 5000;
+
+  // Company showcase images
+  const companyImages = [
+    '/images/event-collage-1.png',
+    '/images/event-collage-2.png',
+    '/images/event-collage-3.png',
+  ];
+
+  // Enhanced SVG Social Icons with gradients
   const socialIcons = {
-    website: '🌐',
-    whatsapp: '📱',
-    instagram: '📷',
-    facebook: '👥',
-    twitter: '🐦'
+    website: (
+      <svg className="w-6 h-6" fill="url(#websiteGradient)" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="websiteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1a7be6" />
+            <stop offset="100%" stopColor="#0066cc" />
+          </linearGradient>
+        </defs>
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+      </svg>
+    ),
+    whatsapp: (
+      <svg className="w-6 h-6" fill="url(#whatsappGradient)" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="whatsappGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#25D366" />
+            <stop offset="100%" stopColor="#128C7E" />
+          </linearGradient>
+        </defs>
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.051 3.528"/>
+      </svg>
+    ),
+    instagram: (
+      <svg className="w-6 h-6" fill="url(#instagramGradient)" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="instagramGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#E4405F" />
+            <stop offset="50%" stopColor="#F56040" />
+            <stop offset="100%" stopColor="#FCAF45" />
+          </linearGradient>
+        </defs>
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    ),
+    facebook: (
+      <svg className="w-6 h-6" fill="url(#facebookGradient)" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="facebookGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1877F2" />
+            <stop offset="100%" stopColor="#42A5F5" />
+          </linearGradient>
+        </defs>
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    ),
+    twitter: (
+      <svg className="w-6 h-6" fill="url(#twitterGradient)" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="twitterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1DA1F2" />
+            <stop offset="100%" stopColor="#0D8BD9" />
+          </linearGradient>
+        </defs>
+        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+      </svg>
+    )
   };
 
-  const updateUserActivity = useCallback(() => {
-    lastUserActivityRef.current = Date.now();
+  // Auto-rotate images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % companyImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
   }, []);
 
-  const handleVisibilityChange = useCallback(() => {
-    isDocumentVisibleRef.current = !document.hidden;
+  // Rotate particle sets
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentParticleSet((prev) => (prev + 1) % 3);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
 
-    if (!document.hidden) {
-      const timeSinceLastUpdate = Date.now() - (lastUpdated || 0);
-      if (timeSinceLastUpdate > REFRESH_INTERVAL) {
-        fetchMicrositeData(true);
-      }
-    }
-  }, [lastUpdated]);
-
+  // Fixed fetchMicrositeData function definition with useCallback
   const fetchMicrositeData = useCallback(async (isBackgroundRefresh = false) => {
     if (isBackgroundRefresh && !loading) {
       const timeSinceActivity = Date.now() - lastUserActivityRef.current;
@@ -103,7 +172,22 @@ export default function Home() {
       setLoading(false);
       setIsRefreshing(false);
     }
-  }, [microsite, loading, retryCount]);
+  }, [loading, microsite, retryCount, MAX_RETRY_ATTEMPTS, RETRY_DELAY]);
+
+  const updateUserActivity = () => {
+    lastUserActivityRef.current = Date.now();
+  };
+
+  const handleVisibilityChange = useCallback(() => {
+    isDocumentVisibleRef.current = !document.hidden;
+
+    if (!document.hidden) {
+      const timeSinceLastUpdate = Date.now() - (lastUpdated || 0);
+      if (timeSinceLastUpdate > REFRESH_INTERVAL) {
+        fetchMicrositeData(true);
+      }
+    }
+  }, [lastUpdated, REFRESH_INTERVAL, fetchMicrositeData]);
 
   useEffect(() => {
     fetchMicrositeData();
@@ -128,7 +212,7 @@ export default function Home() {
       });
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [fetchMicrositeData, updateUserActivity, handleVisibilityChange]);
+  }, [fetchMicrositeData, handleVisibilityChange, REFRESH_INTERVAL]);
 
   const handleManualRefresh = () => {
     updateUserActivity();
@@ -154,61 +238,181 @@ export default function Home() {
     window.open(finalUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const formatLastUpdated = (timestamp) => {
-    if (!timestamp) return '';
-    const now = Date.now();
-    const diff = now - timestamp;
-    const minutes = Math.floor(diff / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-
-    if (minutes > 0) return `${minutes}m ago`;
-    return `${seconds}s ago`;
-  };
-
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-          <div className="text-gray-600">Loading microsite...</div>
-          <div className="text-gray-400 text-sm mt-2">Please wait</div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-orange-50 relative overflow-hidden">
+        {/* Enhanced Loading Background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
+          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-orange-100/30 blur-3xl"></div>
+          
+          {/* Floating Loading Particles */}
+          <motion.div 
+            className="absolute top-[20%] left-[10%] w-8 h-8 rounded-md bg-[#1a7be6]/20"
+            animate={{ 
+              y: [0, -15, 0],
+              rotate: [0, 10, 0],
+              opacity: [0.3, 0.8, 0.3]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div 
+            className="absolute top-[30%] right-[15%] w-10 h-10 rounded-full bg-[#f35e0e]/20"
+            animate={{ 
+              y: [0, 20, 0],
+              x: [0, -10, 0],
+              opacity: [0.4, 0.9, 0.4]
+            }}
+            transition={{ 
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-center relative z-10"
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="w-20 h-20 mx-auto mb-6"
+          >
+            <Image
+              src="/images/assets/logo/Logo FWB PNG Transparan.png"
+              alt="FWB Plus Logo"
+              width={80}
+              height={80}
+              className="w-full h-full object-contain opacity-80"
+              priority
+            />
+          </motion.div>
+          
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-2xl font-bold text-gray-900 mb-2"
+          >
+            Loading {STATIC_TITLE}...
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-gray-600"
+          >
+            Connecting to our services
+          </motion.p>
+
+          {/* Enhanced Loading Animation */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-6 flex justify-center space-x-1"
+          >
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                className="w-3 h-3 bg-[#1a7be6] rounded-full"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  delay: i * 0.2
+                }}
+              />
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
 
   if (error && !microsite) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="text-center max-w-md mx-auto p-6">
-          <div className="text-red-500 text-xl mb-2">⚠️</div>
-          <div className="text-gray-600 mb-4">{error}</div>
-          <button
-            onClick={handleManualRefresh}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors"
-          >
-            Try Again
-          </button>
-          <div className="text-gray-400 text-xs mt-2">
-            Auto-retry in progress...
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-orange-50 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-red-100/30 blur-3xl"></div>
+          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-orange-100/30 blur-3xl"></div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-md mx-auto p-8 relative z-10"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="w-20 h-20 mx-auto mb-6 bg-red-100 rounded-full flex items-center justify-center"
+          >
+            <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </motion.div>
+          
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Connection Issue</h2>
+          <p className="text-gray-600 mb-6">{error}</p>
+          
+          <motion.button
+            onClick={handleManualRefresh}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-[#1a7be6] to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-8 py-3 rounded-full font-medium shadow-lg transition-all duration-300 flex items-center justify-center mx-auto"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Try Again
+          </motion.button>
+          
+          <p className="text-gray-400 text-sm mt-4">Auto-retry in progress...</p>
+        </motion.div>
       </div>
     );
   }
 
   if (!microsite) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="text-center">
-          <div className="text-gray-500">No microsite data available</div>
-          <button
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-orange-50 relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="text-center relative z-10"
+        >
+          <div className="w-20 h-20 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+            <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">No Data Available</h2>
+          <motion.button
             onClick={handleManualRefresh}
-            className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-[#1a7be6] hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium"
           >
             Refresh
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
     );
   }
@@ -220,88 +424,469 @@ export default function Home() {
     Object.entries(microsite.socialMedia).filter(([platform, url]) => url && platform !== '_id') : [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-      <div className="max-w-md mx-auto">
-        <div className="flex justify-between items-center mb-4 text-xs text-gray-500">
-          <div className="flex items-center space-x-2">
-            {isRefreshing && (
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-                {/* <span>Updating...</span> */}
-              </div>
-            )}
-            {error && (
-              <div className="flex items-center space-x-1 text-amber-600">
-                <span>⚠️</span>
-                <span>Connection issues</span>
-              </div>
-            )}
-          </div>
-          <div className="flex items-center space-x-2">
-            {/* <button
-              onClick={handleManualRefresh}
-              className="p-1 hover:bg-white/50 rounded transition-colors"
-              title="Refresh"
-              disabled={isRefreshing}
-            >
-              <svg className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-            </button> */}
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 relative overflow-hidden">
+      {/* Enhanced Background Decorations */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Large background circles */}
+        <div className="absolute top-20 right-[10%] w-96 h-96 rounded-full bg-blue-100/20 blur-3xl"></div>
+        <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-orange-100/20 blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-100/10 to-pink-100/10 blur-3xl"></div>
+        
+        {/* Animated floating shapes */}
+        <AnimatePresence>
+          {[...Array(8)].map((_, i) => {
+            const shapes = [
+              { type: 'circle', color: '#1a7be6' },
+              { type: 'square', color: '#f35e0e' },
+              { type: 'triangle', color: '#ce1010' },
+              { type: 'star', color: '#9333ea' }
+            ];
+            const shape = shapes[i % 4];
+            const set = Math.floor(i / 2);
+            
+            return (
+              <motion.div
+                key={`${currentParticleSet}-${i}`}
+                className={`absolute w-${3 + (i % 4)} h-${3 + (i % 4)} ${
+                  shape.type === 'circle' ? 'rounded-full' : 
+                  shape.type === 'square' ? 'rounded-md' : 
+                  shape.type === 'star' ? 'rounded-sm rotate-45' : 'rounded-sm'
+                }`}
+                style={{
+                  backgroundColor: `${shape.color}15`,
+                  left: `${5 + (i * 12)}%`,
+                  top: `${15 + (i * 8)}%`,
+                  transform: shape.type === 'triangle' ? 'rotate(45deg)' : 'none'
+                }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: set === currentParticleSet ? [0.2, 0.6, 0.2] : 0,
+                  scale: set === currentParticleSet ? [1, 1.3, 1] : 0,
+                  y: [0, -25, 0],
+                  x: [0, 15, 0],
+                  rotate: shape.type === 'triangle' ? [45, 70, 45] : [0, 15, 0]
+                }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.8
+                }}
+              />
+            );
+          })}
+        </AnimatePresence>
+      </div>
 
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4 animate-bounce">{STATIC_ICON}</div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">{STATIC_TITLE}</h1>
-          {microsite.isPublished && (
-            <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-              <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-              Live
+      <div className="relative z-10 py-8 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-lg mx-auto"
+        >
+          {/* Status Bar */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-between items-center mb-8 text-xs text-gray-500"
+          >
+            <div className="flex items-center space-x-2">
+              <AnimatePresence>
+                {isRefreshing && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    className="flex items-center space-x-1"
+                  >
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                      className="w-2 h-2 bg-blue-400 rounded-full"
+                    />
+                    <span>Updating...</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              
+              <AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    className="flex items-center space-x-1 text-amber-600"
+                  >
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Connection issue</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          )}
-        </div>
+          </motion.div>
 
-        {sortedLinks.length > 0 && (
-          <div className="space-y-4 mb-8">
-            {sortedLinks.map((link, index) => (
-              <button
-                key={link.id || index}
-                onClick={() => handleLinkClick(link.url)}
-                className="w-full bg-white hover:bg-gray-50 border border-gray-200 rounded-2xl p-4 text-center font-medium text-gray-900 transition-all duration-200 hover:shadow-lg hover:scale-105 hover:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          {/* Company Header Section with Carousel */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-center mb-12"
+          >
+            {/* Company Logo and Image Carousel */}
+            <div className="relative mb-8">
+              <motion.div
+                className="relative w-32 h-32 mx-auto mb-6"
+                animate={{ 
+                  y: [0, -8, 0],
+                  rotate: [0, 2, 0]
+                }}
+                transition={{ 
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               >
-                <div className="flex items-center justify-center space-x-2">
-                  <span>{link.title}</span>
-                  <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-orange-400/20 rounded-full blur-xl"></div>
+                <div className="relative w-full h-full bg-white rounded-full shadow-2xl p-6 border border-gray-100">
+                  <Image
+                    src="/images/assets/logo/Logo FWB PNG Transparan.png"
+                    alt="FWB Plus Logo"
+                    width={120}
+                    height={120}
+                    className="w-full h-full object-contain"
+                    priority
+                  />
                 </div>
-              </button>
-            ))}
-          </div>
-        )}
+              </motion.div>
 
-        {activeSocialMedia.length > 0 && (
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-            <h3 className="text-center text-gray-700 font-medium mb-4">Connect with us</h3>
-            <div className="flex justify-center space-x-6">
-              {activeSocialMedia.map(([platform, url]) => (
-                <button
-                  key={platform}
-                  onClick={() => handleSocialClick(platform, url)}
-                  className="text-3xl hover:scale-110 transition-transform duration-200 opacity-80 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded-full p-1"
-                  title={platform.charAt(0).toUpperCase() + platform.slice(1)}
-                >
-                  {socialIcons[platform] || '🔗'}
-                </button>
-              ))}
+              {/* Company Showcase Images */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="relative w-full h-48 rounded-2xl overflow-hidden shadow-xl mb-6"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.7 }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={companyImages[currentImageIndex]}
+                      alt={`FWB Plus Portfolio ${currentImageIndex + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                  </motion.div>
+                </AnimatePresence>
+                
+                {/* Image indicators */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {companyImages.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentImageIndex ? 'bg-white' : 'bg-white/50'
+                      }`}
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
             </div>
-          </div>
-        )}
+            
+            {/* Company Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            >
+              <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-[#1a7be6] via-purple-600 to-[#f35e0e] bg-clip-text text-transparent">
+                {STATIC_TITLE}
+              </h1>
+              
+              <p className="text-lg text-gray-600 font-medium mb-4">
+                {STATIC_SUBTITLE}
+              </p>
+              
+              <p className="text-gray-500 text-sm leading-relaxed max-w-md mx-auto">
+                {STATIC_DESCRIPTION}
+              </p>
+            </motion.div>
+            
+            <AnimatePresence>
+              {microsite.isPublished && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  className="inline-flex items-center px-6 py-3 rounded-full text-sm font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 shadow-lg mt-6 border border-green-200"
+                >
+                  <motion.div
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-2 h-2 bg-green-500 rounded-full mr-3"
+                  />
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z" />
+                  </svg>
+                  Now Live & Active
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
-        <div className="text-center mt-8 text-gray-500 text-sm">
-          <p>Powered by FWB+ Microsite</p>
-        </div>
+          {/* Enhanced Links Section */}
+          <AnimatePresence>
+            {sortedLinks.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="space-y-5 mb-12"
+              >
+                <h2 className="text-xl font-bold text-gray-800 text-center mb-6">Our Services & Links</h2>
+                {sortedLinks.map((link, index) => (
+                  <motion.button
+                    key={link.id || index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                    onClick={() => handleLinkClick(link.url)}
+                    whileHover={{ 
+                      scale: 1.02, 
+                      y: -5,
+                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)"
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className="group w-full bg-white/90 backdrop-blur-md hover:bg-white border border-gray-200 hover:border-blue-300 rounded-2xl p-6 text-center font-medium text-gray-900 transition-all duration-300 shadow-lg hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-[#1a7be6] focus:ring-offset-2 relative overflow-hidden"
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-[#1a7be6]/5 via-purple-500/5 to-[#f35e0e]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      initial={false}
+                      animate={{ 
+                        background: [
+                          "linear-gradient(90deg, rgba(26,123,230,0.05) 0%, rgba(147,51,234,0.05) 50%, rgba(243,94,14,0.05) 100%)",
+                          "linear-gradient(90deg, rgba(243,94,14,0.05) 0%, rgba(26,123,230,0.05) 50%, rgba(147,51,234,0.05) 100%)",
+                          "linear-gradient(90deg, rgba(147,51,234,0.05) 0%, rgba(243,94,14,0.05) 50%, rgba(26,123,230,0.05) 100%)"
+                        ]
+                      }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                    />
+                    
+                    <div className="relative z-10 flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#1a7be6] to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Image
+                            src="/images/assets/logo/Logo FWB PNG Transparan.png"
+                            alt="FWB Plus"
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 object-contain filter brightness-0 invert"
+                          />
+                        </div>
+                        <div className="text-left">
+                          <h3 className="text-lg font-bold text-gray-900 group-hover:text-[#1a7be6] transition-colors">
+                            {link.title}
+                          </h3>
+                          <p className="text-sm text-gray-500">Click to visit our platform</p>
+                        </div>
+                      </div>
+                      
+                      <motion.div
+                        className="text-gray-400 group-hover:text-[#1a7be6] transition-colors"
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 5 }}
+                      >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </motion.div>
+                    </div>
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Enhanced Social Media Section */}
+          <AnimatePresence>
+            {activeSocialMedia.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                className="bg-white/80 backdrop-blur-md rounded-3xl p-8 border border-white/40 shadow-2xl"
+              >
+                <motion.h3
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  className="text-center text-gray-800 font-bold mb-8 text-xl"
+                >
+                  Connect With Us
+                </motion.h3>
+                
+                <div className="flex justify-center space-x-6">
+                  {activeSocialMedia.map(([platform, url], index) => (
+                    <motion.button
+                      key={platform}
+                      initial={{ opacity: 0, scale: 0, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ 
+                        duration: 0.6, 
+                        delay: 1.4 + index * 0.15,
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20
+                      }}
+                      onClick={() => handleSocialClick(platform, url)}
+                      whileHover={{ 
+                        scale: 1.2, 
+                        y: -8,
+                        rotate: [0, 10, -10, 0]
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                      className="group relative w-16 h-16 bg-white hover:bg-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-200 overflow-hidden"
+                      title={platform.charAt(0).toUpperCase() + platform.slice(1)}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        initial={false}
+                        whileHover={{ 
+                          background: [
+                            "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 50%, rgba(249,115,22,0.1) 100%)",
+                            "linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(59,130,246,0.1) 50%, rgba(147,51,234,0.1) 100%)"
+                          ]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                      />
+                      <span className="relative z-10 transition-transform duration-300 group-hover:scale-110">
+                        {socialIcons[platform] || '🔗'}
+                      </span>
+                      
+                      {/* Ripple effect */}
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl"
+                        initial={{ scale: 0, opacity: 0.5 }}
+                        whileHover={{ 
+                          scale: 1.5, 
+                          opacity: 0,
+                          transition: { duration: 0.6 }
+                        }}
+                        style={{
+                          background: 'radial-gradient(circle, rgba(26,123,230,0.3) 0%, transparent 70%)'
+                        }}
+                      />
+                    </motion.button>
+                  ))}
+                </div>
+                
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 1.8 }}
+                  className="text-center text-gray-500 text-sm mt-6"
+                >
+                  Follow us for updates and behind-the-scenes content
+                </motion.p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Enhanced Footer */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.6 }}
+            className="text-center mt-12 text-gray-500 text-sm"
+          >
+            <div className="mb-4 flex items-center justify-center space-x-2">
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="w-6 h-6"
+              >
+                <Image
+                  src="/images/assets/logo/Logo FWB PNG Transparan.png"
+                  alt="FWB Plus"
+                  width={24}
+                  height={24}
+                  className="w-full h-full object-contain opacity-70"
+                />
+              </motion.div>
+              <span className="font-medium">Powered by FWB+ Microsite</span>
+            </div>
+            
+            <p className="text-xs opacity-75">
+              © 2025 FWB Plus Event Organizer. All rights reserved.
+            </p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 2 }}
+              className="mt-4 flex items-center justify-center space-x-4 text-xs"
+            >
+              <span className="flex items-center">
+                <svg className="w-3 h-3 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Secure
+              </span>
+              <span className="flex items-center">
+                <svg className="w-3 h-3 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clipRule="evenodd" />
+                </svg>
+                Responsive
+              </span>
+              <span className="flex items-center">
+                <svg className="w-3 h-3 mr-1 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Professional
+              </span>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Enhanced Wave divider at bottom */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+        <svg 
+          className="relative block w-full h-24" 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 1200 120" 
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" />
+              <stop offset="50%" stopColor="#f8fafc" />
+              <stop offset="100%" stopColor="#ffffff" />
+            </linearGradient>
+          </defs>
+          <motion.path 
+            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
+            fill="url(#waveGradient)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+          />
+        </svg>
       </div>
     </div>
   );
