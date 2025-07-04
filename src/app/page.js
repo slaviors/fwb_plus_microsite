@@ -18,9 +18,9 @@ export default function Home() {
   const isDocumentVisibleRef = useRef(true);
 
   const STATIC_TITLE = "FWB Plus Organizer";
-  const STATIC_SUBTITLE = "Event Organizer & Creative Solutions";
+  const STATIC_SUBTITLE = "FWB Plus Organizer";
   const STATIC_DESCRIPTION =
-    "Transforming visions into unforgettable experiences. Professional event organization services for corporate gatherings, celebrations, and special moments.";
+    "Professional event organization services for corporate gatherings, celebrations, and special moments.";
 
   const REFRESH_INTERVAL = 30000;
   const USER_ACTIVITY_THRESHOLD = 5000;
@@ -853,10 +853,6 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
-                {STATIC_TITLE}
-              </h1>
-
               <p className="text-lg text-gray-700 font-medium mb-4">
                 {STATIC_SUBTITLE}
               </p>
@@ -920,7 +916,7 @@ export default function Home() {
                       boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="group w-full bg-white/90 backdrop-blur-md hover:bg-white border border-gray-200 hover:border-blue-300 rounded-2xl p-6 text-center font-medium text-gray-900 transition-all duration-300 shadow-lg hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 relative overflow-hidden"
+                    className="group w-full bg-white/90 backdrop-blur-md hover:bg-white border border-gray-200 hover:border-blue-300 rounded-2xl p-4 text-center font-medium text-gray-900 transition-all duration-300 shadow-lg hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 relative overflow-hidden"
                   >
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-blue-400/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -993,7 +989,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
-                className="bg-white/80 backdrop-blur-md rounded-3xl p-6 border border-white/40 shadow-2xl"
+                className="bg-white/80 backdrop-blur-md rounded-3xl p-4 border border-white/40 shadow-2xl"
               >
                 <motion.h3
                   initial={{ opacity: 0 }}
