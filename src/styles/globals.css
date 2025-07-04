@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Unbounded';
+  src: url('/fonts/Unbounded-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('/fonts/Rubik-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@layer base {
+  :root {
+    --color-primary: 26, 123, 230; /* #1a7be6 */
+    --color-secondary: 243, 94, 14; /* #f35e0e */
+    --color-accent: 206, 16, 16; /* #ce1010 */
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Rubik', system-ui, sans-serif;
+    color: #374151;
+  }
+}
