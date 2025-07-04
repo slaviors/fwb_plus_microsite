@@ -99,7 +99,7 @@ export default function Home() {
       setCurrentImageIndex((prev) => (prev + 1) % companyImages.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [companyImages.length]);
 
   // Rotate particle sets
   useEffect(() => {
