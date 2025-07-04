@@ -951,7 +951,7 @@ export default function Home() {
                             {link.title}
                           </h3>
                           <p className="text-sm text-gray-500">
-                            Click to visit our platform
+                            Click to visit
                           </p>
                         </div>
                       </div>
