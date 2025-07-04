@@ -1231,7 +1231,7 @@ export default function Home() {
 
               <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                     <svg
                       className="w-7 h-7 text-white"
                       fill="none"
@@ -1247,7 +1247,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-xl font-bold text-white mb-1">
+                    <h3 className="text-lg font-bold text-white mb-1">
                       Kontak Bisnis
                     </h3>
                     <p className="text-blue-100 text-sm">
