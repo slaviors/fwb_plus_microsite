@@ -21,7 +21,7 @@ export default function Home() {
   const STATIC_TITLE = "FWB Plus Organizer";
   const STATIC_SUBTITLE = "FWB Plus Organizer";
   const STATIC_DESCRIPTION =
-    "Professional event organization services for corporate gatherings, celebrations, and special moments.";
+    "Penyelenggara acara profesional untuk corporate gathering, pameran, konser, dan perayaan spesial di Jogja & Semarang.";
 
   const REFRESH_INTERVAL = 30000;
   const USER_ACTIVITY_THRESHOLD = 5000;
@@ -343,51 +343,46 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-white relative overflow-hidden">
-        {/* Plus Pattern Background */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundImage: `url('/images/assets/logo/Logo FWB logomark PNG Trnsparan.png')`,
-              backgroundSize: "80px 80px",
-              backgroundRepeat: "repeat",
-              backgroundPosition: "0 0, 40px 40px",
-            }}
-          />
-        </div>
-
-        {/* Modern Loading Background Effects */}
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 flex items-center justify-center relative overflow-hidden">
+        {/* Decorative elements - same as Hero */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Subtle gradient circles */}
+          {/* Circles */}
+          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
+          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/30 blur-3xl"></div>
+
+          {/* Floating shapes */}
           <motion.div
-            className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)",
-            }}
+            className="absolute top-[20%] left-[10%] w-8 h-8 rounded-md bg-[#1a7be6]/20"
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
+              y: [0, -15, 0],
+              rotate: [0, 10, 0],
             }}
             transition={{
-              duration: 8,
+              duration: 5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
           />
           <motion.div
-            className="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)",
-            }}
+            className="absolute top-[30%] right-[15%] w-10 h-10 rounded-full bg-[#f35e0e]/20"
             animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.2, 0.5, 0.2],
+              y: [0, 20, 0],
+              x: [0, -10, 0],
             }}
             transition={{
-              duration: 10,
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-[25%] right-[20%] w-12 h-12 rounded-md rotate-45 bg-[#1a7be6]/10"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 15, 0],
+            }}
+            transition={{
+              duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -418,7 +413,7 @@ export default function Home() {
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               style={{
                 background:
-                  "conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.3), transparent)",
+                  "conic-gradient(from 0deg, transparent, rgba(26, 123, 230, 0.3), transparent)",
               }}
             />
 
@@ -446,11 +441,11 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Floating particles around logo */}
+            {/* Floating particles around logo - similar to Hero pattern */}
             {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-blue-400 rounded-full opacity-30"
+                className="absolute w-2 h-2 bg-[#1a7be6] rounded-full opacity-30"
                 style={{
                   top: "50%",
                   left: "50%",
@@ -479,18 +474,18 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="space-y-4"
           >
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-2xl font-unbounded font-bold text-gray-900">
               Memuat {STATIC_TITLE}
             </h2>
 
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-600 font-rubik text-sm">
               Menghubungkan ke layanan kami
             </p>
 
             {/* Modern Progress Indicator */}
             <div className="relative w-48 h-1 bg-gray-200 rounded-full mx-auto overflow-hidden">
               <motion.div
-                className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
+                className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#1a7be6] to-blue-600 rounded-full"
                 animate={{
                   x: ["-100%", "100%"],
                 }}
@@ -503,7 +498,7 @@ export default function Home() {
               />
             </div>
 
-            {/* Loading Dots */}
+            {/* Loading Dots - similar to Hero animations */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -513,7 +508,7 @@ export default function Home() {
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
-                  className="w-2 h-2 bg-blue-500 rounded-full"
+                  className="w-2 h-2 bg-[#1a7be6] rounded-full"
                   animate={{
                     scale: [1, 1.4, 1],
                     opacity: [0.4, 1, 0.4],
@@ -535,24 +530,50 @@ export default function Home() {
 
   if (error && !microsite) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-white relative overflow-hidden">
-        {/* Plus Pattern Background */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundImage: `url('/images/assets/logo/Logo FWB logomark PNG Trnsparan.png')`,
-              backgroundSize: "80px 80px",
-              backgroundRepeat: "repeat",
-              backgroundPosition: "0 0, 40px 40px",
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 flex items-center justify-center relative overflow-hidden">
+        {/* Decorative elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Circles */}
+          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
+          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/30 blur-3xl"></div>
+
+          {/* Floating shapes */}
+          <motion.div
+            className="absolute top-[20%] left-[10%] w-8 h-8 rounded-md bg-[#1a7be6]/20"
+            animate={{
+              y: [0, -15, 0],
+              rotate: [0, 10, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
           />
-        </div>
-
-        {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-red-100/30 blur-3xl"></div>
-          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/30 blur-3xl"></div>
+          <motion.div
+            className="absolute top-[30%] right-[15%] w-10 h-10 rounded-full bg-[#f35e0e]/20"
+            animate={{
+              y: [0, 20, 0],
+              x: [0, -10, 0],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-[25%] right-[20%] w-12 h-12 rounded-md rotate-45 bg-[#1a7be6]/10"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 15, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
         </div>
 
         <motion.div
@@ -582,34 +603,42 @@ export default function Home() {
             </svg>
           </motion.div>
 
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-unbounded font-bold text-gray-900 mb-4">
             Connection Issue
           </h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+          <p className="font-rubik text-gray-600 mb-6">{error}</p>
 
           <motion.button
             onClick={handleManualRefresh}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-8 py-3 rounded-full font-medium shadow-lg transition-all duration-300 flex items-center justify-center mx-auto"
+            className="relative overflow-hidden px-8 py-4 rounded-full bg-[#1a7be6] text-white font-medium text-lg shadow-lg shadow-blue-200 group"
           >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-            Try Again
+            <span className="relative z-10 flex items-center justify-center">
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              <span>Try Again</span>
+            </span>
+            <motion.span
+              className="absolute inset-0 bg-blue-600 z-0"
+              initial={{ x: "100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            />
           </motion.button>
 
-          <p className="text-gray-400 text-sm mt-4">
+          <p className="font-rubik text-gray-400 text-sm mt-4">
             Auto-retry in progress...
           </p>
         </motion.div>
@@ -619,16 +648,48 @@ export default function Home() {
 
   if (!microsite) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-white relative overflow-hidden">
-        {/* Plus Pattern Background */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div
-            className="w-full h-full"
-            style={{
-              backgroundImage: `url('/images/assets/logo/Logo FWB logomark PNG Trnsparan.png')`,
-              backgroundSize: "80px 80px",
-              backgroundRepeat: "repeat",
-              backgroundPosition: "0 0, 40px 40px",
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 flex items-center justify-center relative overflow-hidden">
+        {/* Decorative elements - same as Hero */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Circles */}
+          <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
+          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/30 blur-3xl"></div>
+
+          {/* Floating shapes */}
+          <motion.div
+            className="absolute top-[20%] left-[10%] w-8 h-8 rounded-md bg-[#1a7be6]/20"
+            animate={{
+              y: [0, -15, 0],
+              rotate: [0, 10, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute top-[30%] right-[15%] w-10 h-10 rounded-full bg-[#f35e0e]/20"
+            animate={{
+              y: [0, 20, 0],
+              x: [0, -10, 0],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-[25%] right-[20%] w-12 h-12 rounded-md rotate-45 bg-[#1a7be6]/10"
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 15, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
           />
         </div>
@@ -654,16 +715,37 @@ export default function Home() {
               />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-xl font-unbounded font-semibold text-gray-700 mb-4">
             No Data Available
           </h2>
           <motion.button
             onClick={handleManualRefresh}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-medium"
+            className="relative overflow-hidden px-8 py-4 rounded-full bg-[#1a7be6] text-white font-medium text-lg shadow-lg shadow-blue-200 group"
           >
-            Refresh
+            <span className="relative z-10 flex items-center justify-center">
+              <span>Refresh</span>
+              <motion.svg
+                className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </motion.svg>
+            </span>
+            <motion.span
+              className="absolute inset-0 bg-blue-600 z-0"
+              initial={{ x: "100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            />
           </motion.button>
         </motion.div>
       </div>
@@ -681,80 +763,53 @@ export default function Home() {
     : [];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-blue-50 to-white relative overflow-hidden">
-      {/* Plus Pattern Background */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `url('/images/assets/logo/Logo FWB logomark PNG Trnsparan.png')`,
-            backgroundSize: "80px 80px",
-            backgroundRepeat: "repeat",
-            backgroundPosition: "0 0, 40px 40px",
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
+      {/* Decorative elements - same as Hero */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Circles */}
+        <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
+        <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/30 blur-3xl"></div>
+
+        {/* Floating shapes */}
+        <motion.div
+          className="absolute top-[20%] left-[10%] w-8 h-8 rounded-md bg-[#1a7be6]/20"
+          animate={{
+            y: [0, -15, 0],
+            rotate: [0, 10, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute top-[30%] right-[15%] w-10 h-10 rounded-full bg-[#f35e0e]/20"
+          animate={{
+            y: [0, 20, 0],
+            x: [0, -10, 0],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-[25%] right-[20%] w-12 h-12 rounded-md rotate-45 bg-[#1a7be6]/10"
+          animate={{
+            y: [0, -20, 0],
+            x: [0, 15, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
         />
       </div>
 
-      {/* Enhanced Background Decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Large background circles */}
-        <div className="absolute top-20 right-[10%] w-96 h-96 rounded-full bg-blue-100/15 blur-3xl"></div>
-        <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/10 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-blue-100/5 to-blue-50/5 blur-3xl"></div>
-
-        {/* Animated floating shapes with blue theme */}
-        <AnimatePresence>
-          {[...Array(8)].map((_, i) => {
-            const shapes = [
-              { type: "circle", color: "#3b82f6" },
-              { type: "square", color: "#1d4ed8" },
-              { type: "triangle", color: "#60a5fa" },
-              { type: "star", color: "#2563eb" },
-            ];
-            const shape = shapes[i % 4];
-            const set = Math.floor(i / 2);
-
-            return (
-              <motion.div
-                key={`${currentParticleSet}-${i}`}
-                className={`absolute w-${3 + (i % 4)} h-${3 + (i % 4)} ${
-                  shape.type === "circle"
-                    ? "rounded-full"
-                    : shape.type === "square"
-                    ? "rounded-md"
-                    : shape.type === "star"
-                    ? "rounded-sm rotate-45"
-                    : "rounded-sm"
-                }`}
-                style={{
-                  backgroundColor: `${shape.color}08`,
-                  left: `${5 + i * 12}%`,
-                  top: `${15 + i * 8}%`,
-                  transform:
-                    shape.type === "triangle" ? "rotate(45deg)" : "none",
-                }}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{
-                  opacity: set === currentParticleSet ? [0.1, 0.3, 0.1] : 0,
-                  scale: set === currentParticleSet ? [1, 1.3, 1] : 0,
-                  y: [0, -25, 0],
-                  x: [0, 15, 0],
-                  rotate: shape.type === "triangle" ? [45, 70, 45] : [0, 15, 0],
-                }}
-                exit={{ opacity: 0, scale: 0 }}
-                transition={{
-                  duration: 10,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.8,
-                }}
-              />
-            );
-          })}
-        </AnimatePresence>
-      </div>
-
-      {/* Contact Modal */}
+      {/* Contact Modal - Similar to Hero modals */}
       <AnimatePresence>
         {showContactModal && (
           <motion.div
@@ -765,27 +820,21 @@ export default function Home() {
             onClick={() => setShowContactModal(false)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 50 }}
-              transition={{
-                duration: 0.4,
-                ease: [0.22, 1, 0.36, 1],
-                type: "spring",
-                stiffness: 300,
-                damping: 30,
-              }}
-              className="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border border-gray-100"
+              exit={{ opacity: 0, scale: 0.8, y: 30 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-3xl shadow-xl max-w-sm w-full overflow-hidden border border-blue-100/50 relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="p-6 pb-4 relative">
+              <div className="p-6 pb-4 bg-[#1a7be6] relative">
                 <button
                   onClick={() => setShowContactModal(false)}
-                  className="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
+                  className="absolute top-4 right-4 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors"
                 >
                   <svg
-                    className="w-4 h-4 text-gray-600"
+                    className="w-4 h-4 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -799,143 +848,66 @@ export default function Home() {
                   </svg>
                 </button>
 
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{
-                    delay: 0.2,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 25,
-                  }}
-                  className="text-center"
+                <motion.h3
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-xl font-unbounded font-bold text-white text-center"
                 >
-                  <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">
-                    {contactInfo.name}
-                  </h3>
-                  <p className="text-gray-500 text-sm">Business Manager</p>
-                </motion.div>
+                  Hubungi Kami
+                </motion.h3>
               </div>
 
               {/* Content */}
-              <div className="px-6 pb-6 space-y-4">
-                {/* WhatsApp */}
+              <div className="p-6 space-y-5">
+                {/* WhatsApp Button */}
                 <motion.button
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.3 }}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
                   onClick={handleWhatsAppClick}
-                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileHover={{
+                    y: -2,
+                    boxShadow: "0 10px 15px -3px rgba(26, 123, 230, 0.1)",
+                  }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center p-4 bg-green-50 hover:bg-green-100 rounded-2xl transition-all duration-300 group"
+                  className="w-full flex items-center p-4 bg-white border border-gray-200 hover:border-[#1a7be6] rounded-2xl transition-all duration-200 shadow-sm"
                 >
-                  <motion.div
-                    className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mr-4"
-                    whileHover={{ rotate: 15 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center mr-4">
                     <svg
-                      className="w-6 h-6 text-white"
+                      className="w-5 h-5 text-white"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.051 3.528" />
                     </svg>
-                  </motion.div>
-                  <div className="text-left">
-                    <div className="font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
+                  </div>
+                  <div className="text-left flex-1">
+                    <div className="font-unbounded font-semibold text-gray-900">
                       WhatsApp
                     </div>
-                    <div className="text-gray-500 text-sm">
+                    <div className="text-gray-500 font-rubik text-sm">
                       {contactInfo.phone}
                     </div>
                   </div>
                 </motion.button>
 
-                {/* Phone */}
-                <motion.div
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.3 }}
-                  className="flex items-center p-4 bg-blue-50 rounded-2xl"
-                >
-                  <motion.div
-                    className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-4"
-                    whileHover={{ rotate: 15 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                  </motion.div>
-                  <div className="text-left flex-1">
-                    <div className="font-semibold text-gray-900">Telepon</div>
-                    <div className="text-gray-500 text-sm">
-                      {contactInfo.phone}
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => copyToClipboard(contactInfo.phone)}
-                    className="w-8 h-8 bg-white rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  >
-                    <svg
-                      className="w-4 h-4 text-gray-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
-                      />
-                    </svg>
-                  </button>
-                </motion.div>
-
-                {/* Email */}
+                {/* Email Button */}
                 <motion.button
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.5, duration: 0.3 }}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
                   onClick={handleEmailClick}
-                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileHover={{
+                    y: -2,
+                    boxShadow: "0 10px 15px -3px rgba(26, 123, 230, 0.1)",
+                  }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center p-4 bg-gray-50 hover:bg-gray-100 rounded-2xl transition-all duration-300 group"
+                  className="w-full flex items-center p-4 bg-white border border-gray-200 hover:border-[#1a7be6] rounded-2xl transition-all duration-200 shadow-sm"
                 >
-                  <motion.div
-                    className="w-12 h-12 bg-gray-500 rounded-xl flex items-center justify-center mr-4"
-                    whileHover={{ rotate: 15 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <div className="w-10 h-10 bg-[#f35e0e] rounded-xl flex items-center justify-center mr-4">
                     <svg
-                      className="w-6 h-6 text-white"
+                      className="w-5 h-5 text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -947,67 +919,96 @@ export default function Home() {
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-                  </motion.div>
+                  </div>
                   <div className="text-left">
-                    <div className="font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">
+                    <div className="font-unbounded font-semibold text-gray-900">
                       Email
                     </div>
-                    <div className="text-gray-500 text-sm">
+                    <div className="text-gray-500 font-rubik text-sm">
                       {contactInfo.email}
                     </div>
                   </div>
                 </motion.button>
 
+                {/* Instagram Button */}
+                <motion.button
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  onClick={handleInstagramClick}
+                  whileHover={{
+                    y: -2,
+                    boxShadow: "0 10px 15px -3px rgba(26, 123, 230, 0.1)",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center p-4 bg-white border border-gray-200 hover:border-[#1a7be6] rounded-2xl transition-all duration-200 shadow-sm"
+                >
+                  <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <div className="font-unbounded font-semibold text-gray-900">
+                      Instagram
+                    </div>
+                    <div className="text-gray-500 font-rubik text-sm">
+                      {contactInfo.instagram}
+                    </div>
+                  </div>
+                </motion.button>
+
                 {/* Office Locations */}
-                <div className="space-y-3 pt-2">
-                  <h4 className="text-sm font-semibold text-gray-600 text-center uppercase tracking-wide">
-                    Kantor
+                <motion.div
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="border-t border-gray-200 pt-4 mt-4"
+                >
+                  <h4 className="text-sm font-unbounded font-semibold text-gray-600 mb-3">
+                    Kantor Kami
                   </h4>
 
-                  {contactInfo.offices.map((office, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.6 + index * 0.1, duration: 0.3 }}
-                      className="flex items-start p-3 bg-blue-50 rounded-xl"
-                    >
-                      <motion.div
-                        className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3 flex-shrink-0"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                      </motion.div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-semibold text-gray-900 text-sm">
-                          {office.city}
+                  <div className="space-y-3">
+                    {contactInfo.offices.map((office, index) => (
+                      <div key={index} className="bg-blue-50 rounded-xl p-3">
+                        <div className="flex items-start space-x-3">
+                          <svg
+                            className="w-5 h-5 text-[#1a7be6] mt-0.5 flex-shrink-0"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                          </svg>
+                          <div>
+                            <div className="font-unbounded text-sm font-semibold text-gray-900">
+                              {office.city}
+                            </div>
+                            <p className="text-gray-600 text-xs font-rubik leading-relaxed mt-1">
+                              {office.address}
+                            </p>
+                          </div>
                         </div>
-                        <p className="text-gray-600 text-xs leading-relaxed">
-                          {office.address}
-                        </p>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
@@ -1040,9 +1041,9 @@ export default function Home() {
                     <motion.div
                       animate={{ scale: [1, 1.2, 1] }}
                       transition={{ duration: 1, repeat: Infinity }}
-                      className="w-2 h-2 bg-blue-400 rounded-full"
+                      className="w-2 h-2 bg-[#1a7be6] rounded-full"
                     />
-                    <span>Updating...</span>
+                    <span className="font-rubik">Updating...</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -1068,7 +1069,7 @@ export default function Home() {
                         d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span>Connection issue</span>
+                    <span className="font-rubik">Connection issue</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -1107,14 +1108,40 @@ export default function Home() {
                     priority
                   />
                 </div>
+
+                {/* Decorative elements - similar to Hero */}
+                <motion.div
+                  className="absolute -top-3 -right-3 w-6 h-6 rounded-md bg-[#1a7be6]/20"
+                  animate={{
+                    y: [0, -5, 0],
+                    rotate: [0, 10, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <motion.div
+                  className="absolute -bottom-2 -left-2 w-8 h-8 rounded-full bg-[#1a7be6]/10"
+                  animate={{
+                    y: [0, 5, 0],
+                    x: [0, -3, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
               </motion.div>
 
-              {/* Company Showcase Images */}
+              {/* Company Showcase Images - similar to Hero carousel */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="relative w-full h-48 rounded-2xl overflow-hidden shadow-xl mb-6"
+                className="relative w-full h-48 rounded-3xl overflow-hidden shadow-xl shadow-blue-200/50 mb-6"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -1132,22 +1159,39 @@ export default function Home() {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
+
+                    {/* Gradient overlay like in Hero */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                   </motion.div>
                 </AnimatePresence>
 
-                {/* Image indicators */}
+                {/* Image indicators - like dot navigation in Hero */}
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                   {companyImages.map((_, index) => (
                     <motion.button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        index === currentImageIndex ? "bg-white" : "bg-white/50"
-                      }`}
-                      whileHover={{ scale: 1.2 }}
-                      whileTap={{ scale: 0.9 }}
-                    />
+                      className="relative p-1 focus:outline-none"
+                    >
+                      <motion.span
+                        animate={{
+                          scale: index === currentImageIndex ? 1 : 0.7,
+                          opacity: index === currentImageIndex ? 1 : 0.5,
+                        }}
+                        className={`block w-3 h-3 rounded-full ${
+                          index === currentImageIndex
+                            ? "bg-white"
+                            : "bg-white/50"
+                        }`}
+                      />
+                      {index === currentImageIndex && (
+                        <motion.span
+                          layoutId="imageIndicator"
+                          className="absolute inset-0 rounded-full border-2 border-white"
+                          transition={{ duration: 0.5, type: "spring" }}
+                        />
+                      )}
+                    </motion.button>
                   ))}
                 </div>
               </motion.div>
@@ -1159,11 +1203,19 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <p className="text-lg text-gray-700 font-medium mb-4">
-                {STATIC_SUBTITLE}
-              </p>
+              <h1 className="font-unbounded text-2xl md:text-3xl font-bold leading-tight text-gray-900 mb-3">
+                <span className="relative">
+                  <span className="relative z-10">{STATIC_TITLE}</span>
+                  <motion.span
+                    className="absolute -bottom-1 left-0 right-0 h-3 bg-blue-100 rounded-full -z-10"
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1, delay: 1 }}
+                  />
+                </span>
+              </h1>
 
-              <p className="text-gray-600 text-sm leading-relaxed max-w-md mx-auto">
+              <p className="text-gray-600 font-rubik text-lg leading-relaxed max-w-md mx-auto">
                 {STATIC_DESCRIPTION}
               </p>
             </motion.div>
@@ -1200,7 +1252,7 @@ export default function Home() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Contact Info Button */}
+          {/* Contact Info Button - Hero-like styling */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1211,15 +1263,19 @@ export default function Home() {
               onClick={() => setShowContactModal(true)}
               whileHover={{ scale: 1.02, y: -3 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+              className="w-full rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group border border-[#1a7be6]/20"
+              style={{
+                background: "linear-gradient(135deg, #1a7be6 0%, #1061c0 100%)",
+              }}
             >
+              {/* Button highlight effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 initial={false}
                 animate={{
                   background: [
-                    "linear-gradient(90deg, rgba(59,130,246,0.2) 0%, rgba(96,165,250,0.2) 100%)",
-                    "linear-gradient(90deg, rgba(96,165,250,0.2) 0%, rgba(59,130,246,0.2) 100%)",
+                    "linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%)",
+                    "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%)",
                   ],
                 }}
                 transition={{
@@ -1247,10 +1303,10 @@ export default function Home() {
                     </svg>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-lg font-bold text-white mb-1">
+                    <h3 className="text-lg font-unbounded font-bold text-white mb-1">
                       Kontak Bisnis
                     </h3>
-                    <p className="text-blue-100 text-sm">
+                    <p className="text-blue-100 font-rubik text-sm">
                       Hubungi kami untuk konsultasi gratis
                     </p>
                   </div>
@@ -1279,7 +1335,7 @@ export default function Home() {
             </motion.button>
           </motion.div>
 
-          {/* Enhanced Links Section */}
+          {/* Enhanced Links Section - similar to buttons in Hero */}
           <AnimatePresence>
             {sortedLinks.length > 0 && (
               <motion.div
@@ -1298,19 +1354,19 @@ export default function Home() {
                     whileHover={{
                       scale: 1.02,
                       y: -5,
-                      boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.25)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="group w-full bg-white/90 backdrop-blur-md hover:bg-white border border-gray-200 hover:border-blue-300 rounded-2xl p-4 text-center font-medium text-gray-900 transition-all duration-300 shadow-lg hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 relative overflow-hidden"
+                    className="group w-full bg-white backdrop-blur-md hover:bg-white border border-gray-200 hover:border-[#1a7be6]/30 rounded-2xl p-4 text-center font-medium text-gray-900 transition-all duration-300 shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#1a7be6] focus:ring-offset-2 relative overflow-hidden"
                   >
+                    {/* Subtle background effect - similar to Hero */}
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-blue-400/5 to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       initial={false}
                       animate={{
                         background: [
-                          "linear-gradient(90deg, rgba(59,130,246,0.05) 0%, rgba(96,165,250,0.05) 50%, rgba(37,99,235,0.05) 100%)",
-                          "linear-gradient(90deg, rgba(37,99,235,0.05) 0%, rgba(59,130,246,0.05) 50%, rgba(96,165,250,0.05) 100%)",
-                          "linear-gradient(90deg, rgba(96,165,250,0.05) 0%, rgba(37,99,235,0.05) 50%, rgba(59,130,246,0.05) 100%)",
+                          "linear-gradient(90deg, rgba(26,123,230,0.05) 0%, rgba(96,165,250,0.05) 50%, rgba(37,99,235,0.05) 100%)",
+                          "linear-gradient(90deg, rgba(37,99,235,0.05) 0%, rgba(26,123,230,0.05) 50%, rgba(96,165,250,0.05) 100%)",
+                          "linear-gradient(90deg, rgba(96,165,250,0.05) 0%, rgba(37,99,235,0.05) 50%, rgba(26,123,230,0.05) 100%)",
                         ],
                       }}
                       transition={{
@@ -1322,7 +1378,7 @@ export default function Home() {
 
                     <div className="relative z-10 flex items-center justify-between">
                       <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#1a7be6] to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                           <Image
                             src="/images/assets/logo/Logo FWB PNG Transparan.png"
                             alt="FWB Plus"
@@ -1332,17 +1388,17 @@ export default function Home() {
                           />
                         </div>
                         <div className="text-left">
-                          <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                          <h3 className="text-lg font-unbounded font-bold text-gray-900 group-hover:text-[#1a7be6] transition-colors">
                             {link.title}
                           </h3>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm font-rubik text-gray-500">
                             Click to visit
                           </p>
                         </div>
                       </div>
 
                       <motion.div
-                        className="text-gray-400 group-hover:text-blue-600 transition-colors"
+                        className="text-gray-400 group-hover:text-[#1a7be6] transition-colors"
                         initial={{ x: 0 }}
                         whileHover={{ x: 5 }}
                       >
@@ -1374,13 +1430,13 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
-                className="bg-white/80 backdrop-blur-md rounded-3xl p-4 border border-white/40 shadow-2xl"
+                className="bg-white/80 backdrop-blur-md rounded-3xl p-6 border border-blue-100/50 shadow-xl"
               >
                 <motion.h3
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 1.2 }}
-                  className="text-center text-gray-800 font-bold mb-4 text-xl"
+                  className="text-center text-gray-800 font-unbounded font-bold mb-4 text-xl"
                 >
                   Connect With Us
                 </motion.h3>
@@ -1402,21 +1458,21 @@ export default function Home() {
                       whileHover={{
                         scale: 1.2,
                         y: -8,
-                        rotate: [0, 10, -10, 0],
                       }}
                       whileTap={{ scale: 0.9 }}
-                      className="group relative w-16 h-16 bg-white hover:bg-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center text-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-200 overflow-hidden"
+                      className="group relative w-16 h-16 bg-white hover:bg-gray-50 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center text-gray-600 focus:outline-none focus:ring-4 focus:ring-blue-200 overflow-hidden"
                       title={
                         platform.charAt(0).toUpperCase() + platform.slice(1)
                       }
                     >
+                      {/* Similar hover effect to Hero buttons */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-blue-400/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        className="absolute inset-0 bg-gradient-to-br from-[#1a7be6]/10 via-blue-400/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                         initial={false}
                         whileHover={{
                           background: [
-                            "linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(96,165,250,0.1) 50%, rgba(37,99,235,0.1) 100%)",
-                            "linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(59,130,246,0.1) 50%, rgba(96,165,250,0.1) 100%)",
+                            "linear-gradient(135deg, rgba(26,123,230,0.1) 0%, rgba(96,165,250,0.1) 50%, rgba(37,99,235,0.1) 100%)",
+                            "linear-gradient(135deg, rgba(37,99,235,0.1) 0%, rgba(26,123,230,0.1) 50%, rgba(96,165,250,0.1) 100%)",
                           ],
                         }}
                         transition={{
@@ -1440,7 +1496,7 @@ export default function Home() {
                         }}
                         style={{
                           background:
-                            "radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)",
+                            "radial-gradient(circle, rgba(26,123,230,0.3) 0%, transparent 70%)",
                         }}
                       />
                     </motion.button>
@@ -1451,7 +1507,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 1.8 }}
-                  className="text-center text-gray-500 text-sm mt-6"
+                  className="text-center text-gray-500 font-rubik text-sm mt-6"
                 >
                   Follow us for updates
                 </motion.p>
@@ -1480,14 +1536,37 @@ export default function Home() {
                   className="w-full h-full object-contain opacity-70"
                 />
               </motion.div>
-              <span className="font-medium">Powered by FWB+ Microsite</span>
+              <span className="font-medium font-rubik">
+                Powered by FWB+ Microsite
+              </span>
             </div>
 
-            <p className="text-xs opacity-75">
+            <p className="text-xs font-rubik opacity-75">
               © 2025 FWB Plus Event Organizer. All rights reserved.
             </p>
           </motion.div>
         </motion.div>
+      </div>
+
+      {/* Wave divider - same as in Hero */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
+        <svg
+          className="relative block w-full h-32"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#F5F9FF" />
+              <stop offset="50%" stopColor="#ffffff" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+            fill="url(#waveGradient)"
+          />
+        </svg>
       </div>
     </div>
   );
