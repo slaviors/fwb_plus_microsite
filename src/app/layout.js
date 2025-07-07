@@ -24,90 +24,118 @@ export const metadata = {
   
   // Comprehensive Keywords
   keywords: [
-    // Primary Brand Keywords
-    "FWB Plus",
-    "FWB Plus Event Organizer",
-    "FWB Plus EO",
-    "FWB Plus Jogja",
-    "FWB Plus Semarang",
-    
-    // General Event Organizer Keywords
-    "event organizer",
-    "penyelenggara acara",
-    "jasa event organizer",
-    "EO profesional",
-    "event planner",
-    "wedding organizer",
-    "corporate event",
-    "event management",
-    "organizer acara",
-    "jasa EO",
-    
-    // Location-Based Keywords - Yogyakarta/Jogja
-    "event organizer jogja",
-    "event organizer yogyakarta",
-    "EO jogja",
-    "EO yogyakarta",
-    "penyelenggara acara jogja",
-    "penyelenggara acara yogyakarta",
-    "wedding organizer jogja",
-    "wedding organizer yogyakarta",
-    "jasa event jogja",
-    "jasa event yogyakarta",
-    "corporate event jogja",
-    "corporate event yogyakarta",
-    
-    // Location-Based Keywords - Semarang
-    "event organizer semarang",
-    "EO semarang",
-    "penyelenggara acara semarang",
-    "wedding organizer semarang",
-    "jasa event semarang",
-    "corporate event semarang",
-    "event planner semarang",
-    
-    // Service-Specific Keywords
-    "corporate gathering",
-    "team building",
-    "pameran",
-    "exhibition",
-    "konser musik",
-    "festival",
-    "seminar",
-    "workshop",
-    "launching product",
-    "grand opening",
-    "birthday party",
-    "anniversary",
-    "graduation party",
-    "family gathering",
-    
-    // Equipment & Services Keywords
-    "sewa alat event",
-    "rental sound system",
-    "sewa lighting",
-    "sewa tenda",
-    "catering event",
-    "dekorasi event",
-    "dokumentasi event",
-    "mc event",
-    "host event",
-    "security event",
-    
-    // Quality & Trust Keywords
-    "event organizer terpercaya",
-    "event organizer profesional",
-    "event organizer murah",
-    "event organizer berkualitas",
-    "EO terbaik",
-    "EO berpengalaman",
-    "jasa event terpercaya",
-    "organizer acara profesional"
-  ],
+  // Brand & Variasi Nama
+  "FWB Plus",
+  "FWB Plus EO",
+  "FWB Plus Event Organizer",
+  "FWB Plus Jogja",
+  "FWB Plus Semarang",
+  "fwbplus.com",
+  
+  // Umum: Event Organizer
+  "event organizer",
+  "jasa event organizer",
+  "penyelenggara acara",
+  "jasa EO",
+  "EO terpercaya",
+  "EO profesional",
+  "event planner",
+  "event management",
+  "organizer acara",
+  "jasa penyelenggara acara",
+  "vendor event organizer",
+  "crew event organizer",
+  "jenis event organizer",
+  "contoh event organizer",
+  
+  // Berdasarkan Lokasi: Jogja / Yogyakarta
+  "event organizer jogja",
+  "EO jogja",
+  "penyelenggara acara jogja",
+  "jasa EO jogja",
+  "wedding organizer jogja",
+  "event organizer yogyakarta",
+  "EO yogyakarta",
+  "penyelenggara acara yogyakarta",
+  "EO terpercaya jogja",
+  "jasa event organizer jogja",
+  "EO di jogja",
+  
+  // Berdasarkan Lokasi: Semarang
+  "event organizer semarang",
+  "EO semarang",
+  "penyelenggara acara semarang",
+  "jasa EO semarang",
+  "wedding organizer semarang",
+  "EO terpercaya semarang",
+  "event organizer terbaik semarang",
+  
+  // Berdasarkan Layanan
+  "corporate gathering",
+  "corporate event",
+  "meeting perusahaan",
+  "pameran",
+  "exhibition",
+  "wedding organizer",
+  "konser musik",
+  "festival musik",
+  "launching produk",
+  "grand opening",
+  "seminar",
+  "workshop",
+  "family gathering",
+  "ulang tahun",
+  "anniversary",
+  "event komunitas",
+  "pernikahan outdoor",
+  
+  // Jasa Penunjang Event
+  "sewa alat event",
+  "sewa sound system",
+  "sewa lighting",
+  "sewa panggung",
+  "sewa tenda acara",
+  "sewa kursi dan meja event",
+  "rental alat event jogja",
+  "jasa dekorasi event",
+  "jasa catering event",
+  "jasa dokumentasi event",
+  "MC event jogja",
+  "host event semarang",
+  "talent event organizer",
+  "manpower event",
+  "booth event custom",
+  
+  // Keyword Pencarian Populer Google
+  "event organizer adalah",
+  "event organizer artinya",
+  "event organizer jakarta",
+  "event organizer terbaik di indonesia",
+  "event organizer logo",
+  "jasa event organizer terbaik",
+  "jasa event organizer surabaya",
+  "jasa event organizer inaproc",
+  "jasa event organizer katalog",
+  "jasa dokumentasi acara",
+  "jasa dekorasi acara",
+  "jasa MC acara",
+  "jasa foto acara",
+  "jasa penyelenggara acara jakarta",
+  
+  // Kepercayaan dan Kualitas
+  "event organizer terpercaya",
+  "event organizer profesional",
+  "event organizer murah",
+  "EO terbaik jogja",
+  "EO terbaik semarang",
+  "jasa event berkualitas",
+  "EO berpengalaman",
+  "jasa event organizer full service"
+],
   
   // Author Information
   authors: [
-    { name: "FWB Plus Event Organizer", url: "https://fwbplus.com" },
+    { name: "FWB Plus Event Organizer", url: "https://links-fwb-plus.vercel.app" },
     { name: "FWB Plus Team" }
   ],
   creator: "FWB Plus Event Organizer",
@@ -121,7 +149,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://fwbplus.com",
+    url: "https://links-fwb-plus.vercel.app",
     siteName: "FWB Plus Event Organizer",
     title: "FWB Plus | Event Organizer Profesional di Jogja & Semarang",
     description: "Penyelenggara acara profesional untuk corporate gathering, wedding, konser, pameran, dan berbagai event di Yogyakarta dan Semarang. Konsultasi gratis!",
@@ -228,21 +256,21 @@ export const metadata = {
   
   // Alternate Languages
   alternates: {
-    canonical: "https://fwbplus.com",
+    canonical: "https://links-fwb-plus.vercel.app",
     languages: {
-      "id-ID": "https://fwbplus.com",
-      "en-US": "https://fwbplus.com/en",
+      "id-ID": "https://links-fwb-plus.vercel.app",
+      "en-US": "https://links-fwb-plus.vercel.app/en",
     },
   },
   
   // Bookmarks
-  bookmarks: ["https://fwbplus.com"],
+  bookmarks: ["https://links-fwb-plus.vercel.app"],
   
   // Archives
-  archives: ["https://fwbplus.com/blog"],
+  archives: ["https://links-fwb-plus.vercel.app/blog"],
   
   // Assets
-  assets: ["https://fwbplus.com/assets"],
+  assets: ["https://links-fwb-plus.vercel.app/assets"],
   
   // Generator
   generator: "Next.js 15",
@@ -312,8 +340,8 @@ export default function RootLayout({ children }) {
               "@type": "Organization",
               "name": "FWB Plus Event Organizer",
               "alternateName": ["FWB Plus", "FWB+ Event Organizer"],
-              "url": "https://fwbplus.com",
-              "logo": "https://fwbplus.com/images/assets/logo/Logo FWB PNG Transparan.png",
+              "url": "https://links-fwb-plus.vercel.app",
+              "logo": "https://links-fwb-plus.vercel.app/images/assets/logo/Logo FWB PNG Transparan.png",
               "description": "Penyelenggara acara profesional untuk corporate gathering, wedding, konser, pameran, dan berbagai event di Yogyakarta dan Semarang.",
               "address": {
                 "@type": "PostalAddress",
@@ -362,7 +390,7 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               "name": "FWB Plus Event Organizer",
-              "image": "https://fwbplus.com/images/assets/logo/Logo FWB PNG Transparan.png",
+              "image": "https://links-fwb-plus.vercel.app/images/assets/logo/Logo FWB PNG Transparan.png",
               "telephone": "+62-812-3456-7890",
               "address": {
                 "@type": "PostalAddress",
@@ -377,7 +405,7 @@ export default function RootLayout({ children }) {
                 "latitude": -7.797068,
                 "longitude": 110.370529
               },
-              "url": "https://fwbplus.com",
+              "url": "https://links-fwb-plus.vercel.app",
               "openingHours": "Mo-Su 08:00-20:00",
               "priceRange": "$$",
               "servesCuisine": "Event Services",
