@@ -11,8 +11,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Viewport Configuration (moved from metadata)
+export const viewport = {
+  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#1a7be6" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a7be6" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 // Comprehensive SEO Metadata Configuration
 export const metadata = {
+  // Set metadataBase to resolve social images
+  metadataBase: new URL("https://links.fwbplus.id"),
+  
   // Primary Title Configuration
   title: {
     default: "FWB Plus | Event Organizer & Penyelenggara Acara Profesional di Jogja, Semarang",
@@ -213,11 +229,6 @@ export const metadata = {
   // Additional Metadata
   applicationName: "FWB Plus Event Organizer",
   referrer: "origin-when-cross-origin",
-  colorScheme: "light",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1a7be6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a7be6" },
-  ],
   
   // Apple-specific
   appleWebApp: {
