@@ -18,8 +18,8 @@ export default function Home() {
   const lastUserActivityRef = useRef(Date.now());
   const isDocumentVisibleRef = useRef(true);
 
-  const STATIC_TITLE = "FWB Plus Organizer";
-  const STATIC_SUBTITLE = "FWB Plus Organizer";
+  const STATIC_TITLE = "FWB+ Organizer";
+  const STATIC_SUBTITLE = "FWB+ Organizer";
   const STATIC_DESCRIPTION =
     "Penyelenggara acara profesional untuk corporate gathering, pameran, konser, dan perayaan spesial di Jogja & Semarang.";
 
@@ -319,7 +319,7 @@ export default function Home() {
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(
-      "Halo, saya tertarik dengan layanan FWB Plus Organizer. Bisa tolong berikan informasi lebih lanjut?"
+      "Halo, saya tertarik dengan layanan FWB+ Organizer. Bisa tolong berikan informasi lebih lanjut?"
     );
     window.open(`https://wa.me/${contactInfo.phone}?text=${message}`, "_blank");
   };
@@ -1154,7 +1154,7 @@ export default function Home() {
                   >
                     <Image
                       src={companyImages[currentImageIndex]}
-                      alt={`FWB Plus Portfolio ${currentImageIndex + 1}`}
+                      alt={`FWB+ Portfolio ${currentImageIndex + 1}`}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
@@ -1542,7 +1542,18 @@ export default function Home() {
             </div>
 
             <p className="text-xs font-rubik opacity-75">
-              © 2025 FWB Plus Event Organizer. All rights reserved.
+              © 2025{" "}
+              <Image
+                src="https://fwbplus.id/images/assets/logo/fwb-text.svg"
+                alt="FWB Plus"
+                width={30}
+                height={9}
+                className="inline-block mx-1 align-middle brightness-0 saturate-100"
+                style={{
+                  filter:
+                    "invert(19%) sepia(10%) saturate(1029%) hue-rotate(184deg) brightness(97%) contrast(88%)",
+                }}
+              />{" "}All rights reserved.
             </p>
           </motion.div>
         </motion.div>
