@@ -44,7 +44,7 @@ export default function Home() {
       {
         city: "Semarang",
         address:
-          "Jl. Sinar Waluyo Raya No. 523, Kel. Kedungmundu, Kec. Tembalang, Kota Semarang, 50273",
+          "Jl. Sinar Waluyo Raya, Kel. Kedungmundu, Kec. Tembalang, Kota Semarang, 50273",
       },
     ],
   };
@@ -309,7 +309,19 @@ export default function Home() {
     let finalUrl = url;
 
     if (platform === "whatsapp" && !url.startsWith("https://wa.me/")) {
-      finalUrl = `https://wa.me/${url.replace(/[^0-9]/g, "")}`;
+      let phoneNumber = url.replace(/[^0-9]/g, "");
+
+      if (phoneNumber.startsWith("08")) {
+        phoneNumber = "62" + phoneNumber.substring(1);
+      }
+      else if (phoneNumber.startsWith("620")) {
+        phoneNumber = "62" + phoneNumber.substring(3);
+      }
+      else if (!phoneNumber.startsWith("62")) {
+        phoneNumber = "62" + phoneNumber;
+      }
+
+      finalUrl = `https://wa.me/${phoneNumber}`;
     } else if (!url.startsWith("http")) {
       finalUrl = `https://${url}`;
     }
@@ -321,7 +333,20 @@ export default function Home() {
     const message = encodeURIComponent(
       "Halo, saya tertarik dengan layanan FWB+ Organizer. Bisa tolong berikan informasi lebih lanjut?"
     );
-    window.open(`https://wa.me/${contactInfo.phone}?text=${message}`, "_blank");
+
+    let phoneNumber = contactInfo.phone.replace(/[^0-9]/g, "");
+
+    if (phoneNumber.startsWith("08")) {
+      phoneNumber = "62" + phoneNumber.substring(1);
+    }
+    else if (phoneNumber.startsWith("620")) {
+      phoneNumber = "62" + phoneNumber.substring(3);
+    }
+    else if (!phoneNumber.startsWith("62")) {
+      phoneNumber = "62" + phoneNumber;
+    }
+
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
 
   const handleCallClick = () => {
@@ -348,7 +373,6 @@ export default function Home() {
         <div className="absolute inset-0 overflow-hidden">
           {/* Circles */}
           <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
-          <div className="absolute bottom-20 left-[5%] w-80 h-80 rounded-full bg-blue-100/30 blur-3xl"></div>
 
           {/* Floating shapes */}
           <motion.div
@@ -1522,7 +1546,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 1.6 }}
             className="text-center mt-12 text-gray-500 text-sm"
           >
-            <div className="mb-4 flex items-center justify-center space-x-2">
+            {/* <div className="mb-4 flex items-center justify-center space-x-2">
               <motion.div
                 animate={{ rotate: [0, 360] }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -1539,7 +1563,7 @@ export default function Home() {
               <span className="font-medium font-rubik">
                 Powered by FWB+ Microsite
               </span>
-            </div>
+            </div> */}
 
             <p className="text-xs font-rubik opacity-75">
               © 2025{" "}
@@ -1553,7 +1577,8 @@ export default function Home() {
                   filter:
                     "invert(19%) sepia(10%) saturate(1029%) hue-rotate(184deg) brightness(97%) contrast(88%)",
                 }}
-              />{" "}All rights reserved.
+              />{" "}
+              All rights reserved.
             </p>
           </motion.div>
         </motion.div>
