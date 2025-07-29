@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,9 +52,11 @@ export default function Home() {
 
   // Company showcase images
   const companyImages = [
-    "/images/event-collage-1.png",
-    "/images/event-collage-2.png",
-    "/images/event-collage-3.png",
+    "/images/corporate-events.JPG",
+    "/images/entertainment.JPG",
+    "/images/event-equipment.JPG",
+    "/images/exhibition.JPG",
+    "/images/gathering.JPG",
   ];
 
   // Enhanced SVG Social Icons with gradients
@@ -1567,16 +1570,12 @@ export default function Home() {
 
             <p className="text-xs font-rubik opacity-75">
               © 2025{" "}
-              <Image
-                src="https://fwbplus.id/images/assets/logo/fwb-text.svg"
+              <img
+                src="https://fwbplus.id/images/assets/logo/fwb-text.webp"
                 alt="FWB Plus"
                 width={30}
                 height={9}
-                className="inline-block mx-1 align-middle brightness-0 saturate-100"
-                style={{
-                  filter:
-                    "invert(19%) sepia(10%) saturate(1029%) hue-rotate(184deg) brightness(97%) contrast(88%)",
-                }}
+                className="inline-block mx-1 align-middle"
               />{" "}
               All rights reserved.
             </p>
