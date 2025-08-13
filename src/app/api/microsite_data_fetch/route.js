@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
-        const BACKEND_API_URL = 'https://fwbplus.id/api/public/microsite';
+        const BACKEND_API_URL = 'https://fwbplus.id/api/public/microsite' || 'https://preview-fwb-plus.verce.app/api/public/microsite';
 
         const response = await fetch(BACKEND_API_URL, {
             method: 'GET',
