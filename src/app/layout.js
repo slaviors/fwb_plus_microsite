@@ -11,8 +11,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Viewport Configuration (moved from metadata)
+export const viewport = {
+  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#1a7be6" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a7be6" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 // Comprehensive SEO Metadata Configuration
 export const metadata = {
+  // Set metadataBase to resolve social images
+  metadataBase: new URL("https://links.fwbplus.id"),
+  
   // Primary Title Configuration
   title: {
     default: "FWB Plus | Event Organizer & Penyelenggara Acara Profesional di Jogja, Semarang",
@@ -135,7 +151,7 @@ export const metadata = {
   
   // Author Information
   authors: [
-    { name: "FWB Plus Event Organizer", url: "https://links-fwb-plus.vercel.app" },
+    { name: "FWB Plus Event Organizer", url: "https://links.fwbplus.id" },
     { name: "FWB Plus Team" }
   ],
   creator: "FWB Plus Event Organizer",
@@ -149,7 +165,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://links-fwb-plus.vercel.app",
+    url: "https://links.fwbplus.id",
     siteName: "FWB Plus Event Organizer",
     title: "FWB Plus | Event Organizer Profesional di Jogja & Semarang",
     description: "Penyelenggara acara profesional untuk corporate gathering, wedding, konser, pameran, dan berbagai event di Yogyakarta dan Semarang. Konsultasi gratis!",
@@ -213,11 +229,6 @@ export const metadata = {
   // Additional Metadata
   applicationName: "FWB Plus Event Organizer",
   referrer: "origin-when-cross-origin",
-  colorScheme: "light",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1a7be6" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a7be6" },
-  ],
   
   // Apple-specific
   appleWebApp: {
@@ -256,21 +267,21 @@ export const metadata = {
   
   // Alternate Languages
   alternates: {
-    canonical: "https://links-fwb-plus.vercel.app",
+    canonical: "https://links.fwbplus.id",
     languages: {
-      "id-ID": "https://links-fwb-plus.vercel.app",
-      "en-US": "https://links-fwb-plus.vercel.app/en",
+      "id-ID": "https://links.fwbplus.id",
+      "en-US": "https://links.fwbplus.id/en",
     },
   },
   
   // Bookmarks
-  bookmarks: ["https://links-fwb-plus.vercel.app"],
+  bookmarks: ["https://links.fwbplus.id"],
   
   // Archives
-  archives: ["https://links-fwb-plus.vercel.app/blog"],
+  archives: ["https://links.fwbplus.id/blog"],
   
   // Assets
-  assets: ["https://links-fwb-plus.vercel.app/assets"],
+  assets: ["https://links.fwbplus.id/assets"],
   
   // Generator
   generator: "Next.js 15",
@@ -283,13 +294,13 @@ export const metadata = {
   },
   
   // Abstract and Classification
-  abstract: "FWB Plus adalah penyedia jasa event organizer profesional yang melayani berbagai jenis acara di wilayah Yogyakarta dan Semarang dengan pengalaman bertahun-tahun.",
+  abstract: "FWB+ adalah penyedia jasa event organizer profesional yang melayani berbagai jenis acara di wilayah Yogyakarta dan Semarang dengan pengalaman bertahun-tahun.",
   
   // Rating
   rating: "general",
   
   // Copyright
-  copyright: "© 2025 FWB Plus Event Organizer. All rights reserved.",
+  copyright: "© 2025 FWB+ Organizer. All rights reserved.",
 };
 
 export default function RootLayout({ children }) {
@@ -338,10 +349,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "FWB Plus Event Organizer",
-              "alternateName": ["FWB Plus", "FWB+ Event Organizer"],
-              "url": "https://links-fwb-plus.vercel.app",
-              "logo": "https://links-fwb-plus.vercel.app/images/assets/logo/Logo FWB PNG Transparan.png",
+              "name": "FWB+ Event Organizer",
+              "alternateName": ["FWB+", "FWB+ Event Organizer"],
+              "url": "https://links.fwbplus.id",
+              "logo": "https://links.fwbplus.id/images/assets/logo/Logo FWB PNG Transparan.png",
               "description": "Penyelenggara acara profesional untuk corporate gathering, wedding, konser, pameran, dan berbagai event di Yogyakarta dan Semarang.",
               "address": {
                 "@type": "PostalAddress",
@@ -389,8 +400,8 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              "name": "FWB Plus Event Organizer",
-              "image": "https://links-fwb-plus.vercel.app/images/assets/logo/Logo FWB PNG Transparan.png",
+              "name": "FWB+ Event Organizer",
+              "image": "https://links.fwbplus.id/images/assets/logo/Logo FWB PNG Transparan.png",
               "telephone": "+62-812-3456-7890",
               "address": {
                 "@type": "PostalAddress",
@@ -405,7 +416,7 @@ export default function RootLayout({ children }) {
                 "latitude": -7.797068,
                 "longitude": 110.370529
               },
-              "url": "https://links-fwb-plus.vercel.app",
+              "url": "https://links.fwbplus.id",
               "openingHours": "Mo-Su 08:00-20:00",
               "priceRange": "$$",
               "servesCuisine": "Event Services",
@@ -430,7 +441,7 @@ export default function RootLayout({ children }) {
               "description": "Jasa penyelenggaraan acara profesional untuk corporate gathering, wedding, konser, pameran, dan berbagai event lainnya.",
               "provider": {
                 "@type": "Organization",
-                "name": "FWB Plus Event Organizer"
+                "name": "FWB+ Event Organizer"
               },
               "areaServed": ["Yogyakarta", "Semarang"],
               "hasOfferCatalog": {

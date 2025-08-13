@@ -1,12 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml"
->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage/Microsite Landing Page -->
   <url>
-    <loc>https://links-fwb-plus.vercel.app/</loc>
-    <lastmod>2025-07-07</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://links.fwbplus.id/</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <mobile:mobile/>
+    
+    <!-- Logo Images -->
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/assets/logo/Logo FWB PNG Transparan.png</image:loc>
+      <image:title>FWB+ Event Organizer - Logo Transparan</image:title>
+      <image:caption>Logo utama FWB+ Event Organizer profesional di Jogja dan Semarang</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/assets/logo/Brand Identity FWB.png</image:loc>
+      <image:title>FWB+ - Brand Identity</image:title>
+      <image:caption>Brand identity dan visual branding FWB+ Event Organizer</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/assets/logo/Logo FWB logomark PNG.png</image:loc>
+      <image:title>FWB+ - Logomark</image:title>
+      <image:caption>Logomark FWB+ sebagai simbol event organizer terpercaya</image:caption>
+    </image:image>
+    
+    <!-- Company Story -->
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/about/company-story.png</image:loc>
+      <image:title>FWB+ - Company Story</image:title>
+      <image:caption>Cerita perjalanan FWB+ sebagai event organizer profesional</image:caption>
+    </image:image>
+    
+    <!-- Service Images -->
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/services/corporate-event.png</image:loc>
+      <image:title>FWB+ - Corporate Event Service</image:title>
+      <image:caption>Layanan corporate gathering dan meeting perusahaan oleh FWB+</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/services/wedding-event.png</image:loc>
+      <image:title>FWB+ - Wedding Organizer Service</image:title>
+      <image:caption>Jasa wedding organizer profesional untuk pernikahan impian</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/services/concert-event.png</image:loc>
+      <image:title>FWB+ - Concert Event Service</image:title>
+      <image:caption>Penyelenggaraan konser musik dan festival entertainment</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/services/gathering-event.png</image:loc>
+      <image:title>FWB+ - Gathering Event Service</image:title>
+      <image:caption>Layanan family gathering dan event komunitas</image:caption>
+    </image:image>
+    
+    <!-- Portfolio Gallery -->
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/gallery/event1.png</image:loc>
+      <image:title>FWB+ Portfolio - Event 1</image:title>
+      <image:caption>Dokumentasi event organizer profesional hasil kerja FWB+</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/gallery/event2.png</image:loc>
+      <image:title>FWB+ Portfolio - Event 2</image:title>
+      <image:caption>Galeri event gathering yang diselenggarakan FWB+ di Jogja</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/gallery/event3.png</image:loc>
+      <image:title>FWB+ Portfolio - Event 3</image:title>
+      <image:caption>Hasil penyelenggaraan corporate event dan meeting perusahaan</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/gallery/event4.png</image:loc>
+      <image:title>FWB+ Portfolio - Event 4</image:title>
+      <image:caption>Wedding organizer dan celebration event di Semarang</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/gallery/event5.png</image:loc>
+      <image:title>FWB+ Portfolio - Event 5</image:title>
+      <image:caption>Konser musik dan festival yang diorganisir FWB+</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/gallery/event6.png</image:loc>
+      <image:title>FWB+ Portfolio - Event 6</image:title>
+      <image:caption>Pameran exhibition dan launching produk profesional</image:caption>
+    </image:image>
+    
+    <!-- Client Testimonials -->
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/testimonials/client1.png</image:loc>
+      <image:title>FWB+ - Testimoni Client 1</image:title>
+      <image:caption>Testimoni kepuasan klien corporate event FWB+</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/testimonials/client2.png</image:loc>
+      <image:title>FWB+ - Testimoni Client 2</image:title>
+      <image:caption>Review positif wedding organizer dari pasangan pengantin</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/testimonials/client3.png</image:loc>
+      <image:title>FWB+ - Testimoni Client 3</image:title>
+      <image:caption>Feedback klien untuk layanan gathering dan konser musik</image:caption>
+    </image:image>
+    
+    <!-- Event Collages -->
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/testimonials/event-collage-1.png</image:loc>
+      <image:title>FWB+ - Event Collage 1</image:title>
+      <image:caption>Kolase dokumentasi berbagai event yang diselenggarakan FWB+</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/testimonials/event-collage-2.png</image:loc>
+      <image:title>FWB+ - Event Collage 2</image:title>
+      <image:caption>Kumpulan foto event organizer terbaik di Yogyakarta dan Semarang</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://links.fwbplus.id/images/testimonials/event-collage-3.png</image:loc>
+      <image:title>FWB+ - Event Collage 3</image:title>
+      <image:caption>Portfolio lengkap penyelenggaraan event profesional FWB+</image:caption>
+    </image:image>
   </url>
+
 </urlset>

@@ -1,4 +1,84 @@
+# robots.txt for FWB+ Event Organizer
+# https://links.fwbplus.id/robots.txt
+
+# Allow all search engines to crawl everything
 User-agent: *
 Allow: /
 
-Sitemap: https://links-fwb-plus.vercel.app/sitemap.xml
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# Block aggressive crawlers and bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# Allow crawling of all image files for better SEO
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /images/
+
+# Sitemap location
+Sitemap: https://links.fwbplus.id/sitemap.xml
+
+# Additional sitemaps (if you create them later)
+# Sitemap: https://links.fwbplus.id/sitemap-images.xml
+
+# Host directive (helps with canonicalization)
+Host: https://links.fwbplus.id
