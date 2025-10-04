@@ -55,7 +55,7 @@ export default function Home() {
     "/images/corporate-events.JPG",
     "/images/entertainment.JPG",
     "/images/event-equipment.JPG",
-    "/images/exhibition.JPG",
+    "/images/exhibitions.JPG",
     "/images/gathering.JPG",
   ];
 
